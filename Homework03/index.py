@@ -34,19 +34,20 @@ def doubleDigitFormat(intInput):
 
 def tickHandler():
     global curTimerValue
-    if (curTimerValue < maxTimerValue):
+    if (curTimerValue <= maxTimerValue):
         curTimerValue = curTimerValue + 1
-    else:
-        stopTimer()
-        print("Timer stopped because of maximum time reached.")
     if isPrintTimerDebug:
         print("timerDEBUG:"+str(curTimerValue))
+    if (curTimerValue > maxTimerValue):
+        stopTimer()
+        print("Timer stopped because of maximum time reached.")
+    
 
 def drawHandler(canvas):
     global gameCount
     global winCount
     timerMessage = format(curTimerValue)
-    if (curTimerValue >= maxTimerValue):
+    if (curTimerValue > maxTimerValue):
         timerMessage = "Enough."
     scoreMessage = doubleDigitFormat(winCount)+"/"+doubleDigitFormat(gameCount)
     canvas.draw_text(timerMessage, timePosition, 50, "Red")
